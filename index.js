@@ -1,7 +1,9 @@
 const axios = require('axios');
 const { paymentTokenRequestBody, paymentExecutionRequestBody } = require('./fixures/postRequests');
 
-const apiUrl = "https://developers.decidir.com/api/v2";
+const apiDevUrl = 'https://developers.decidir.com/api/v2';
+const apiProdUrl = 'https://live.decidir.com/api/v2';
+
 const apiPublicKey = "e9cdb99fff374b5f91da4480c8dca741";
 const apiPrivateKey = "92b71cf711ca41f78362a7134f87ff65";
 
@@ -25,7 +27,7 @@ const buildAxiosHeaders = (apiKey) => {
  */
 const paymentTokenRequest = async () => {
     try {
-        const { data } = await axios.post(`${apiUrl}/tokens`, paymentTokenRequestBody , buildAxiosHeaders(apiPublicKey));
+        const { data } = await axios.post(`${apiDevUrl}/tokens`, paymentTokenRequestBody , buildAxiosHeaders(apiPublicKey));
         return data
     } catch (e) {
         //TODO: Handle error
@@ -35,7 +37,7 @@ const paymentTokenRequest = async () => {
 
 const paymentExecutionRequest = async () => {
     try {
-        const { data } = await axios.post(`${apiUrl}/payments`, paymentExecutionRequestBody , buildAxiosHeaders(apiPublicKey));
+        const { data } = await axios.post(`${apiDevUrl}/payments`, paymentExecutionRequestBody , buildAxiosHeaders(apiPublicKey));
         return data
     } catch (e) {
         //TODO: Handle error
@@ -49,7 +51,7 @@ const paymentExecutionRequest = async () => {
 
 const paymentListRequest = async () => {
     try {
-        const { data } = await axios.get(`${apiUrl}/payments`, buildAxiosHeaders(apiPrivateKey));
+        const { data } = await axios.get(`${apiDevUrl}/payments`, buildAxiosHeaders(apiPrivateKey));
         return data
     } catch (e) {
         //TODO: Handle error
